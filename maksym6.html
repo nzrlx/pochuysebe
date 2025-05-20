@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Максим — Ситуація 6</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .situation-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      gap: 30px;
+    }
+
+    .situation-text {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.8;
+      color: white;
+    }
+
+    .option-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .option-button {
+      background-color: #ffffff;
+      color: #003366;
+      padding: 18px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid #003366;
+      border-radius: 10px;
+      cursor: pointer;
+      max-width: 300px;
+      transition: background-color 0.3s ease;
+    }
+
+    .option-button:hover {
+      background-color: #0099cc;
+      color: white;
+    }
+
+    .option-button:disabled {
+      background-color: #cccccc;
+      color: #888888;
+      cursor: default;
+    }
+
+    .response-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 10px;
+      color: #040f16;
+      font-size: larger;
+    }
+
+    .heart-score {
+      font-size: 28px;
+      background-color: white;
+      color: #cc0033;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .character-image {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .next-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #b6f7c1;
+      border: 2px solid #008000;
+      color: #003300;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #3cbc52;
+      color: white;
+    }
+  </style>
+</head>
+<body class="sofia-page">
+  <button class="tools-button" onclick="window.open('rules.const.html', '_blank')">🔧</button>
+
+  <div class="situation-container">
+    <div class="situation-text">
+      <h2>Максиму знову приснився кошмарний сон.</h2>
+      <p id="current-heart" class="heart-score">❤️</p>
+      <div class="option-buttons">
+        <button id="btn-left" class="option-button" onclick="showResponse('left')">Прокинутися в паніці та боятися заснути знову</button>
+        <button id="btn-right" class="option-button" onclick="showResponse('right')">Спробувати заспокоїтися, нагадати собі, що це був лише сон, та застосувати техніки релаксації</button>
+      </div>
+    </div>
+    <div>
+      <img src="images/maksym6.png" alt="Максим" class="character-image">
+    </div>
+  </div>
+
+  <div id="response" class="response-container">
+    <div id="heart" class="heart-score">❤️</div>
+    <p id="response-text"></p>
+    <a href="maksym7.html" class="next-button">Далі</a>
+  </div>
+
+  <script>
+    localStorage.removeItem('maksym6Chosen');
+    const previousScore = parseInt(localStorage.getItem('maksymPoints')) || 51;
+    let updatedScore = previousScore;
+
+    document.getElementById('current-heart').textContent = `❤️ ${previousScore}`;
+    document.getElementById('heart').textContent = `❤️ ${previousScore}`;
+
+    function showResponse(choice) {
+      document.getElementById('btn-left').disabled = true;
+      document.getElementById('btn-right').disabled = true;
+      const responseBox = document.getElementById('response');
+      const heart = document.getElementById('heart');
+      const text = document.getElementById('response-text');
+      responseBox.style.display = 'flex';
+
+      if (choice === 'left') {
+        updatedScore = previousScore - 4;
+        text.textContent = 'Сон став ще одним полем бою, де ви знову і знову програвали своїм страхам, безсилі змінити хід жахливих подій. Тепер ви не можете швидко заснути впродовж тижня…';
+      } else if (choice === 'right') {
+        updatedScore = previousScore + 3;
+        text.textContent = 'Крок за кроком, ви почали справлятись з нічним жахом, шукаючи опору у знайомих діях і намагаючись повернути собі контроль.';
+      }
+
+      heart.textContent = `❤️ ${updatedScore}`;
+      document.getElementById('current-heart').textContent = `❤️ ${updatedScore}`;
+      localStorage.setItem('maksymPoints', updatedScore);
+      localStorage.setItem('maksym6Chosen', choice);
+    }
+  </script>
+</body>
+</html>

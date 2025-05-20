@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Карина — Ситуація 10</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .situation-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      gap: 30px;
+    }
+
+    .situation-text {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.8;
+      color: white;
+      text-align: left;
+    }
+
+    .option-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .option-button {
+      background-color: #ffffff;
+      color: #003366;
+      padding: 18px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid #003366;
+      border-radius: 10px;
+      cursor: pointer;
+      max-width: 300px;
+      transition: background-color 0.3s ease;
+    }
+
+    .option-button:hover {
+      background-color: #0099cc;
+      color: white;
+    }
+
+    .option-button:disabled {
+      background-color: #cccccc;
+      color: #888888;
+      cursor: default;
+    }
+
+    .response-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 60px;
+      color: #040f16;
+      font-size: larger;
+    }
+
+    .heart-score {
+      font-size: 28px;
+      background-color: white;
+      color: #cc0033;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .character-image {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .next-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #b6f7c1;
+      border: 2px solid #008000;
+      color: #003300;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #3cbc52;
+      color: white;
+    }
+  </style>
+</head>
+<body class="karina-page">
+  <button class="tools-button" onclick="window.open('rules.const.html', '_blank')">🔧</button>
+
+  <div class="situation-container">
+    <div class="situation-text">
+      <h2>Карина відчуває розчарування через те, що досі не визначилася з майбутнім.</h2>
+      <p id="current-heart" class="heart-score">❤️</p>
+      <div class="option-buttons">
+        <button id="btn-left" class="option-button" onclick="showResponse('left')">Почати звинувачувати себе та вважати себе невдахою.</button>
+        <button id="btn-right" class="option-button" onclick="showResponse('right')">Нагадати собі, що пошук себе – це нормальний процес і не варто себе квапити.</button>
+      </div>
+    </div>
+    <div>
+      <img src="images/karina10.png" alt="Карина" class="character-image">
+    </div>
+  </div>
+
+  <div id="response" class="response-container">
+    <div id="heart" class="heart-score">❤️</div>
+    <p id="response-text"></p>
+    <a href="karina11.html" class="next-button">Далі</a>
+  </div>
+
+  <script>
+    // Скидаємо попередній вибір для karina10
+    localStorage.removeItem('karina10Chosen');
+
+    const btnLeft = document.getElementById("btn-left");
+    const btnRight = document.getElementById("btn-right");
+    const responseBox = document.getElementById("response");
+    const heart = document.getElementById("heart");
+    const text = document.getElementById("response-text");
+    const currentHeart = document.getElementById("current-heart");
+
+    // Отримуємо попередній рахунок з karina9
+    const previousScore = parseInt(localStorage.getItem('karinaPoints')) || 0;
+    let updatedScore = previousScore;
+
+    // Перевіряємо, чи вже зроблено вибір
+    const alreadyChosen = localStorage.getItem('karina10Chosen');
+    currentHeart.textContent = `❤️ ${previousScore}`;
+
+    if (alreadyChosen === 'left' || alreadyChosen === 'right') {
+      btnLeft.disabled = true;
+      btnRight.disabled = true;
+      responseBox.style.display = "flex";
+
+      if (alreadyChosen === 'left') {
+        updatedScore -= 5;
+        text.textContent = "Почуття провини та власної нікчемності знову накрило важкою ковдрою. Було відчуття, що ви не в силах впоратися навіть з найпростішим завданням.";
+      } else if (alreadyChosen === 'right') {
+        updatedScore += 3;
+        text.textContent = "«Пошук себе - це не спринт» - сказали ви собі подумки. Прийняття власної невизначеності принесло несподіване полегшення. Ви зрозуміли, що тиск лише заважає прислухатися до свого внутрішнього голосу.";
+      }
+
+      heart.textContent = `❤️ ${updatedScore}`;
+      currentHeart.textContent = `❤️ ${updatedScore}`;
+    }
+
+    function showResponse(choice) {
+      if (alreadyChosen === 'left' || alreadyChosen === 'right') return;
+
+      btnLeft.disabled = true;
+      btnRight.disabled = true;
+      responseBox.style.display = "flex";
+
+      if (choice === 'left') {
+        updatedScore -= 5;
+        text.textContent = "Почуття провини та власної нікчемності знову накрило важкою ковдрою. Було відчуття, що ви не в силах впоратися навіть з найпростішим завданням.";
+      } else if (choice === 'right') {
+        updatedScore += 3;
+        text.textContent = "«Пошук себе - це не спринт» - сказали ви собі подумки. Прийняття власної невизначеності принесло несподіване полегшення. Ви зрозуміли, що тиск лише заважає прислухатися до свого внутрішнього голосу.";
+      }
+
+      heart.textContent = `❤️ ${updatedScore}`;
+      currentHeart.textContent = `❤️ ${updatedScore}`;
+      localStorage.setItem('karinaPoints', updatedScore);
+      localStorage.setItem('karina10Chosen', choice);
+    }
+  </script>
+</body>
+</html>

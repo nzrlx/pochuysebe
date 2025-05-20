@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Фінал Карини</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+      .final-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start; 
+      align-items: center;
+      max-width: 100%; 
+      margin: 0 auto;
+      padding: 40px 0; 
+      color: rgb(0, 0, 0);
+      box-sizing: border-box;
+    }
+    .final-text {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.8;
+      padding-left: 30px;
+    }
+    
+    .final-image {
+      max-width: 800px;
+      border-radius: 12px;
+      margin: 0; 
+    }
+    .heart-score {
+      font-size: 28px;
+      background-color: white;
+      color: #cc0033;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .back-button {
+      margin: 30px auto;
+      display: block;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #f4d03f;
+      border: 2px solid #b7950b;
+      color: #3e3e3e;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: #f1c40f;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="final-container">
+    <img id="final-image" src="images/karina11.png" alt="Карина фінал" class="final-image">
+    <div class="final-text">
+      <div id="final-heart" class="heart-score"></div>
+      <div id="final-description"></div>
+    </div>
+  </div>
+
+  <button class="back-button" onclick="window.location.href='characters.html'">Повернутись до вибору персонажа</button>
+
+  <script>
+    const score = parseInt(localStorage.getItem('karinaPoints')) || 0;
+    const heart = document.getElementById("final-heart");
+    const description = document.getElementById("final-description");
+    const image = document.getElementById("final-image");
+
+    heart.textContent = `❤️ ${score}`;
+
+    if (score > 51) {
+      image.src = "images/karinapos.png";
+      description.innerHTML = `
+        Карина поступово навчатиметься контролювати свої реакції на тригери, що сприятиме її адаптації до нових умов життя. Вона буде більш чутливою до себе та своїх станів, зможе відновити добру комунікацію з друзями (без бажання втекти від інших) та спробує використовувати письмо й роботу з психологом як терапевтичний інструмент для опрацювання травми.<br><br>
+        <strong>Перелік вправ для адаптації та подолання тригерів:</strong><br>
+        Ці вправи можуть бути корисними, однак вони не є заміною психотерапії. Адже самодопомога є формою підтримки, а не лікуванням. ПТСР — це складна реакція психіки, яка потребує фахової допомоги. Спеціаліст допоможе безпечно працювати з травмою, уникнути ретравматизації.<br><br>
+        <strong>1. Ведення щоденника самопідтримки</strong><br>
+        Ціль: підвищити відчуття безпеки та стабільності.<br>
+        <em>Приклади записів:</em><br>
+        "Сьогодні я подбала(в) про себе так: ..."<br>
+        "Я вдячна(ий) за ..."<br>
+        "Я відчула(в) себе спокійніше, коли ..."<br><br>
+        <strong>2. Створення “Якоря безпеки”</strong><br>
+        Ціль: мати з собою щось, що асоціюється з безпечністю (на випадок тригера).<br>
+        <em>Приклади:</em> камінець, ароматичне масло, фото, коротке заспокійливе повідомлення в телефоні. Використовувати під час тригерних ситуацій для нагадування про реальність і безпеку.<br><br>
+        <strong>3. Складання “Карти тригерів”</strong><br>
+        Ціль: розпізнавати, що саме викликає реакцію, та готувати стратегії реагування.<br>
+        <em>Інструкція:</em><br>
+        - Записуй, що саме стало тригером (місце, звук, ситуація).<br>
+        - Що ти відчув(ла) фізично та емоційно?<br>
+        - Що допомогло або могло б допомогти в цій ситуації?<br>
+        Цю практику краще робити разом із психотерапевтом, щоб безпечно досліджувати глибші аспекти тригерів.
+      `;
+    } else {
+      description.innerHTML = `
+        Карина продовжуватиме уникати ситуацій, які нагадують про травму, що може обмежувати її життя та підтримувати високий рівень тривожності. Її емоційний стан може погіршитися, а довіра до світу — зменшитися.<br><br>
+        <strong>Перелік безкоштовних платформ про ПТСР та підлітків, що пережили окупацію:</strong><br>
+        За підтримки Національної психологічної асоціації (НПА) психологи-волонтери створили центр психологічної підтримки “Як ти?” — <a href="https://docs.google.com/forms/d/e/1FAIpQLSexWl1siLEuP6KQXxj7TC7bBrht0tPEAyJ9C9jMK7WeoWSEww/closedform" target="_blank">посилання</a><br>
+        “Розкажи мені” — безкоштовна інтернет-платформа для психологічних консультацій — <a href="https://tellme.com.ua/" target="_blank">посилання</a><br>
+        “УкрЄдність” — сайт безкоштовної психологічної підтримки від Української спілки психотерапевтів — <a href="https://ukr-ednist.com.ua/" target="_blank">посилання</a>
+      `;
+    }
+  </script>
+</body>
+</html>

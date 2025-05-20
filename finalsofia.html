@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Фінал Софії</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+     .final-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start; 
+      align-items: center;
+      max-width: 100%; 
+      margin: 0 auto;
+      padding: 40px 0; 
+      color: rgb(0, 0, 0);
+      box-sizing: border-box;
+    }
+    .final-text {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.8;
+      padding-left: 30px;
+    }
+    
+    .final-image {
+      max-width: 800px;
+      border-radius: 12px;
+      margin: 0; 
+    }
+    .heart-score {
+      font-size: 28px;
+      background-color: white;
+      color: #cc0033;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .back-button {
+      margin: 30px auto;
+      display: block;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #f4d03f;
+      border: 2px solid #b7950b;
+      color: #3e3e3e;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: #f1c40f;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="final-container">
+    <img id="final-image" src="images/sofia11.png" alt="Софія фінал" class="final-image">
+    <div class="final-text">
+      <div id="final-heart" class="heart-score"></div>
+      <div id="final-description"></div>
+    </div>
+  </div>
+
+  <button class="back-button" onclick="window.location.href='characters.html'">Повернутись до вибору персонажа</button>
+
+  <script>
+    const score = parseInt(localStorage.getItem('sofiaPoints')) || 0;
+    const heart = document.getElementById("final-heart");
+    const description = document.getElementById("final-description");
+    const image = document.getElementById("final-image");
+
+    heart.textContent = `❤️ ${score}`;
+
+    if (score > 51) {
+      image.src = "images/sofiapos.png";
+      description.innerHTML = `
+        Софія поступово почала виходити зі свого замкнутого стану. Вона підтримує соціальні зв'язки, налагоджує стосунки з однолітками, починає бути чутливою та уважною до своїх почуттів та станів. Її тривожність зменшується, а апатія та депресивні думки – відступають, оскільки вона активно працює над своїм емоційним станом.<br><br>
+        <strong>Перелік вправ для зменшення паніки та апатичного стану:</strong><br>
+        <strong>Техніка "5-4-3-2-1"</strong><br>
+        Назвіть:<br>
+        5. П’ЯТЬ речей, які ви бачите навколо себе. (Це можуть бути стіл, кіт, книга).<br>
+        4. ЧОТИРИ речі, до яких ви можете доторкнутися. (Це можуть бути обличчя, книжка, пальто).<br>
+        3. ТРИ речі, які ви чуєте. (Це можуть бути машини, музика, розмова).<br>
+        2. ДВІ речі, які ви відчуваєте. (Це можуть бути аромат випічки, запах деревини).<br>
+        1. ОДНУ річ, яку ви можете спробувати. (Це можуть бути жувальна гумка, кава, ополіскувач для ротової порожнини).<br><br>
+        <strong>Вправа від апатії "Маленький крок"</strong><br>
+        Запишіть 1 дуже просту дію на день (наприклад: помити чашку, вийти на балкон).<br>
+        ➔ Дозволяє повернути відчуття контролю над життям.<br><br>
+        <strong>Вправа для трекінгу змін у своєму стані “Щоденник енергії”</strong><br>
+        Кожного вечора записуйте 3 речі, які дали тобі хоча б трішки енергії, і 3 речі, які підвищили тривогу.<br>
+        ➔ Допомагає помітити джерела ресурсу навіть у складні дні.
+      `;
+    } else {
+      image.src = "images/sofianeg.png";
+      description.innerHTML = `
+        Софія все більше замикається в собі, її тривожність та апатія посилюється. Якщо вона буде продовжувати не реагувати на ці симптоми це може призвести до появи депресивного епізоду. Її емоційний стан може не покращитися без кваліфікованої психологічної допомоги.<br>
+        Вона ризикує втратити зв'язок з друзями, пропустити можливості для проживання позитивних емоцій та нового досвіду.<br><br>
+        <strong>Перелік безкоштовних платформ для кваліфікованої психологічної допомоги:</strong><br>
+        - Mental help: <a href="https://mentalhelp.com.ua/" target="_blank">посилання</a><br>
+        - Tell me: <a href="https://tellme.com.ua/" target="_blank">посилання</a><br>
+        - U care: <a href="https://www.ucare-me.com/" target="_blank">посилання</a><br>
+        - Разом: <a href="https://razom.live/" target="_blank">посилання</a>
+      `;
+    }
+  </script>
+</body>
+</html>

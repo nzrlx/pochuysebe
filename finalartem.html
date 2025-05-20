@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Фінал Артема</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+     .final-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start; 
+      align-items: center;
+      max-width: 100%; 
+      margin: 0 auto;
+      padding: 40px 0; 
+      color: rgb(0, 0, 0);
+      box-sizing: border-box;
+    }
+    .final-text {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.8;
+      padding-left: 30px;
+    }
+    
+    .final-image {
+      max-width: 800px;
+      border-radius: 12px;
+      margin: 0; 
+    }
+    .heart-score {
+      font-size: 28px;
+      background-color: white;
+      color: #cc0033;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .back-button {
+      margin: 30px auto;
+      display: block;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #f4d03f;
+      border: 2px solid #b7950b;
+      color: #3e3e3e;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: #f1c40f;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="final-container">
+    <img id="final-image" src="images/artem11.png" alt="Артем фінал" class="final-image">
+    <div class="final-text">
+      <div id="final-heart" class="heart-score"></div>
+      <div id="final-description"></div>
+    </div>
+  </div>
+
+  <button class="back-button" onclick="window.location.href='characters.html'">Повернутись до вибору персонажа</button>
+
+  <script>
+    const score = parseInt(localStorage.getItem('artemPoints')) || 0;
+    const heart = document.getElementById("final-heart");
+    const description = document.getElementById("final-description");
+    const image = document.getElementById("final-image");
+
+    heart.textContent = `❤️ ${score}`;
+
+    if (score > 51) {
+      image.src = "images/artempos.png";
+    }
+
+    if (score <= 51) {
+      description.innerHTML = `
+        Максим продовжуватиме уникати ситуацій, які нагадують про травму, що може обмежувати його життя та підтримувати високий рівень тривожності. Його емоційний стан може погіршитися, а довіра до світу – зменшитися.<br><br>
+        <strong>Перелік безкоштовних платформ про ПТСР та підлітків, що пережили окупацію:</strong><br>
+        Центр психологічної підтримки “Як ти?” – <a href="https://docs.google.com/forms/d/e/1FAIpQLSexWl1siLEuP6KQXxj7TC7bBrht0tPEAyJ9C9jMK7WeoWSEww/closedform" target="_blank">посилання</a><br>
+        "Розкажи мені" – <a href="https://tellme.com.ua/" target="_blank">посилання</a><br>
+        "УкрЄдність" – <a href="https://ukr-ednist.com.ua/" target="_blank">посилання</a>
+      `;
+    } else {
+      description.innerHTML = `
+        Артем розвиває здорові стратегії самозахисту, вчиться конструктивно виражати свої емоції та відстоювати власні кордони. Звернення за допомогою та підтримкою сприятиме підвищенню його самооцінки та формування нових навичок комунікації з собою та світом.<br><br>
+        <strong>Перелік тестів для самооцінки та вправи для самопідтримки під час булінгу:</strong><br>
+        - Шкала самооцінки Розенберга – <a href="https://www.eztests.xyz/tests/rosenberg_rse/" target="_blank">тест</a><br>
+        - Тест на самооцінку Соренсона – <a href="https://bezpaniki.pro/uk/test-uk/test-merylin-sorenson-dlya-diagnostyky-svoyeyi-samooczinky/" target="_blank">тест</a><br><br>
+        <strong>2. Щоденник сили</strong><br>
+        Ціль: посилити самооцінку. Щовечора записуй 3 речі:<br>
+        Що в мені класного?<br>
+        Що я зробив добре сьогодні?<br>
+        Хто мене поважає / підтримує?<br><br>
+        <strong>3. Список тих, хто мене підтримує</strong><br>
+        Ціль: згадати, що ти не один. Запиши 5 людей, які до тебе добре ставляться. Перечитуй у моменти сумнівів.
+      `;
+    }
+  </script>
+</body>
+</html>

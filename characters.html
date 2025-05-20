@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Обери персонажа</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tools-button {
+      position: fixed;
+      top: 10px;
+      right: 80px;
+      font-size: 100px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body class="characters-page">
+
+  <button class="tools-button" onclick="window.open('rules.const.html', '_blank')">🛠</button>
+
+  <h2 class="main-title">Обери персонажа</h2>
+
+  <div class="characters-grid">
+    <div class="character-card orange-bg" onclick="selectCharacter('Софія', 'sofia_start.html')">
+      <img src="images/sofia.png" alt="Софія">
+      <h3>Софія, 16 років</h3>
+      <p>Переїхала з Харківщини після повномасштабного вторгнення. Відчуває тривогу та самотність.</p>
+    </div>
+
+    <div class="character-card orange-bg" onclick="selectCharacter('Артем', 'artem_start.html')">
+      <img src="images/artem.png" alt="Артем">
+      <h3>Артем, 18 років</h3>
+      <p>Стикнувся з булінгом та нерозумінням. Замкнутий у собі, сумнівається навіть у друзях.</p>
+    </div>
+
+    <div class="character-card orange-bg" onclick="selectCharacter('Карина', 'karina_start.html')">
+      <img src="images/karina.png" alt="Карина">
+      <h3>Карина, 17 років</h3>
+      <p>Виснажена вибором майбутнього. Відчуває тиск і нерозуміння в родині.</p>
+    </div>
+
+    <div class="character-card orange-bg" onclick="selectCharacter('Максим', 'maksym_start.html')">
+      <img src="images/maksym.png" alt="Максим">
+      <h3>Максим, 15 років</h3>
+      <p>Пережив окупацію. Має страхи, почуття провини та замкненість у собі.</p>
+    </div>
+  </div>
+
+  <script>
+    function selectCharacter(name, redirectUrl) {
+      localStorage.setItem('character', name);
+      window.location.href = redirectUrl;
+    }
+  </script>
+</body>
+</html>

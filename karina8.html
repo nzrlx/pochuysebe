@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Карина — Ситуація 8</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .situation-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      gap: 30px;
+    }
+
+    .situation-text {
+      flex: 1;
+      font-size: 20px;
+      line-height: 1.8;
+      color: white;
+    }
+
+    .option-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .option-button {
+      background-color: #ffffff;
+      color: #003366;
+      padding: 18px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid #003366;
+      border-radius: 10px;
+      cursor: pointer;
+      max-width: 300px;
+      transition: background-color 0.3s ease;
+    }
+
+    .option-button:hover {
+      background-color: #0099cc;
+      color: white;
+    }
+
+    .option-button:disabled {
+      background-color: #cccccc;
+      color: #888888;
+      cursor: default;
+    }
+
+    .response-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 60px;
+      color: #040f16;
+      font-size: larger;
+    }
+
+    .heart-score {
+      font-size: 28px;
+      background-color: white;
+      color: #cc0033;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .character-image {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .next-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #b6f7c1;
+      border: 2px solid #008000;
+      color: #003300;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #3cbc52;
+      color: white;
+    }
+  </style>
+</head>
+<body class="karina-page">
+  <button class="tools-button" onclick="window.open('rules.const.html', '_blank')">🔧</button>
+
+  <div class="situation-container">
+    <div class="situation-text">
+      <h2>Карина дізнається про можливість пройти консультацію з психологом у школі.</h2>
+      <p id="current-heart" class="heart-score">❤️</p>
+      <div class="option-buttons">
+        <button id="btn-no" class="option-button" onclick="showResponse('no')">
+          Відмовитися, вважаючи, що психолог не зможе допомогти.
+        </button>
+        <button id="btn-yes" class="option-button" onclick="showResponse('yes')">
+          Записатися на консультацію, щоб отримати професійну допомогу.
+        </button>
+      </div>
+    </div>
+    <div>
+      <img src="images/karina8.png" alt="Карина" class="character-image">
+    </div>
+  </div>
+
+  <div id="response" class="response-container">
+    <div id="heart" class="heart-score">❤️</div>
+    <p id="response-text"></p>
+    <a href="karina9.html" class="next-button">Далі</a>
+  </div>
+
+  <script>
+    // Скидаємо попередній вибір для цієї ситуації
+    localStorage.removeItem('karina8Chosen');
+
+    const btnNo = document.getElementById("btn-no");
+    const btnYes = document.getElementById("btn-yes");
+    const responseBox = document.getElementById("response");
+    const heart = document.getElementById("heart");
+    const text = document.getElementById("response-text");
+    const currentHeart = document.getElementById("current-heart");
+
+    // Отримуємо попередній бал (з karinaPoints)
+    const previousScore = parseInt(localStorage.getItem('karinaPoints')) || 0;
+    let updatedScore = previousScore;
+
+    // Відображаємо початковий бал
+    currentHeart.textContent = `❤️ ${previousScore}`;
+
+    // Перевіряємо, чи вже є вибір
+    const alreadyChosen = localStorage.getItem('karina8Chosen');
+    if (alreadyChosen === 'no' || alreadyChosen === 'yes') {
+      btnNo.disabled = true;
+      btnYes.disabled = true;
+      responseBox.style.display = "flex";
+
+      if (alreadyChosen === 'no') {
+        updatedScore = previousScore - 2;
+        text.textContent = "Звична недовіра до будь-якої зовнішньої допомоги знову взяла гору. Ви продовжували відчувати себе самотньою у своїй проблемі – «ніхто не знає, що у мене в голові».";
+      } else {
+        updatedScore = previousScore + 5;
+        text.textContent = "Перша розмова з психологом виявилася не такою вже й формальною. Вас уважно вислухали, поставили кілька важливих запитань, і вперше за довгий час ви відчули, що вас розуміють.";
+      }
+
+      heart.textContent = `❤️ ${updatedScore}`;
+      currentHeart.textContent = `❤️ ${updatedScore}`;
+    }
+
+    function showResponse(choice) {
+      if (alreadyChosen === 'no' || alreadyChosen === 'yes') return;
+
+      btnNo.disabled = true;
+      btnYes.disabled = true;
+      responseBox.style.display = "flex";
+
+      if (choice === 'no') {
+        updatedScore = previousScore - 2;
+        text.textContent = "Звична недовіра до будь-якої зовнішньої допомоги знову взяла гору. Ви продовжували відчувати себе самотньою у своїй проблемі – «ніхто не знає, що у мене в голові».";
+      } else {
+        updatedScore = previousScore + 5;
+        text.textContent = "Перша розмова з психологом виявилася не такою вже й формальною. Вас уважно вислухали, поставили кілька важливих запитань, і вперше за довгий час ви відчули, що вас розуміють.";
+      }
+
+      heart.textContent = `❤️ ${updatedScore}`;
+      currentHeart.textContent = `❤️ ${updatedScore}`;
+
+      localStorage.setItem('karinaPoints', updatedScore);
+      localStorage.setItem('karina8Chosen', choice);
+    }
+  </script>
+</body>
+</html>

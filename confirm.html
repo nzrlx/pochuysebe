@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Підтвердження email</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Підключення EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <!-- confirm.js -->
+  <script defer src="scripts/confirm.js"></script>
+</head>
+<body class="intro-page">
+  <div class="center-container">
+    <h2 class="main-title" id="greeting">Привіт!</h2>
+
+    <div class="form-text">
+      <p>Будь ласка, введіть свою електронну пошту. Ми надішлемо посилання для підтвердження.</p>
+    </div>
+
+    <input type="email" id="email" class="input-field" placeholder="email@example.com" />
+    <button class="button bordered-button" id="confirmBtn">Підтвердити</button>
+  </div>
+</body>
+</html>
