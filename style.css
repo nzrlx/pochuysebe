@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
+.hero-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 body {
   margin: 0;
   padding: 0;
@@ -323,3 +328,17 @@ body.sofia-page {
   z-index: 9999;
 }
 
+@media (max-width: 600px) {
+  .btn-bar {
+    flex-direction: column;
+    height: auto;          /* кнопки підряд одна під одною */
+    position: relative;    /* вже не фіксуємо внизу */
+  }
+  .btn-bar button {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .main-content {
+    padding-bottom: 20px;  /* знімаємо великий падінг */
+  }
+}
