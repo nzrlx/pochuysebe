@@ -6,55 +6,52 @@
   <title>Фінал Софії</title>
   <link rel="stylesheet" href="style.css">
   <style>
-     .final-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start; 
-      align-items: center;
-      max-width: 100%; 
-      margin: 0 auto;
-      padding: 40px 0; 
-      color: rgb(0, 0, 0);
-      box-sizing: border-box;
-    }
-    .final-text {
-      flex: 1;
-      font-size: 20px;
-      line-height: 1.8;
-      padding-left: 30px;
-    }
-    
-    .final-image {
-      max-width: 800px;
-      border-radius: 12px;
-      margin: 0; 
-    }
-    .heart-score {
-      font-size: 28px;
-      background-color: white;
-      color: #cc0033;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      margin: 20px 0;
-    }
-    .back-button {
-      margin: 30px auto;
-      display: block;
-      padding: 12px 24px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 10px;
-      background-color: #f4d03f;
-      border: 2px solid #b7950b;
-      color: #3e3e3e;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .back-button:hover {
-      background-color: #f1c40f;
-      color: black;
-    }
+
+@media (max-width: 768px) {
+  /* Робимо контейнер колонкою, щоб текст → зображення → рахунок йшли зверху вниз */
+  .final-container {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    height: auto;   /* дозволь автоматичну висоту */
+  }
+
+  /* Текст на всю ширину, без лівого відступу */
+  .final-text {
+    padding-left: 0 !important;
+    width: 100%;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  /* Зображення під текстом, теж на всю ширину */
+  .final-image {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 20px;
+    border-radius: 12px;
+    height: auto;
+  }
+
+  /* Рахунок сердець йде після зображення */
+  .heart-score {
+    margin: 0 0 20px;
+  }
+
+  /* Кнопка завжди під усім контентом, на всю ширину до 300px */
+  .back-button {
+    position: static !important;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 30px;
+    padding: 12px 24px;
+    box-sizing: border-box;
+  }
+}
   </style>
 </head>
 <body>
